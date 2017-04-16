@@ -17,7 +17,7 @@ export function findAllHouse(req, res){
 }
 export function createHouse(req, res){
     let house = new House(req.body.house);
-    house.location = sanitizeHtml(house.location);
+    // house.location = sanitizeHtml(house.location);
     house.cuid = cuid();
     // house.img_Link = sanitizeHtml(house.img_Link);
     house.floor_No = sanitizeHtml(house.floor_No);
@@ -34,7 +34,6 @@ export function createHouse(req, res){
     house.contact.email = sanitizeHtml(house.contact.email);
     house.onSale = true;
     House.findOne().sort({'stt':-1}).exec((err, item) =>{
-        console.log(item);
         if(err || item === null){
             house.stt = 1;
             house.save((err,saved) => {
@@ -54,7 +53,7 @@ export function createHouse(req, res){
     });
 }
 export function findById(req, res){
-    House.findOne({'_id': req.params.id}, function (err, doc){
+    House.findOne({'_id': req.params._id}, function (err, doc){
         if(err){
             res.send(err);
         }else{
@@ -129,5 +128,7 @@ export function deleteHouse(req, res) {
     });
 }
 export function search(req, res) {
-
+    res.json({"req":"sdasdasdas"});
+    let url = req.query;
+    console.log( url.city);
 }

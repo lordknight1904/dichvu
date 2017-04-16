@@ -40,7 +40,7 @@ export function login(req, res) {
                         if(result){
                             res.json({user})
                         }else{
-                            res.json({login: 'Wrong Password'})
+                            res.json({user: 'Wrong Password'})
                         }
                     }
                 });

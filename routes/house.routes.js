@@ -17,6 +17,9 @@ router.use(function (req, res, next) {
     next();
 });
 
+// search
+//router.route('/house/search/:city/:district/:fno/:bno/:bthno/:bedno/:lno/:kno/:square/:price').get(HouseController.search);
+router.route('/house/search/*').get(HouseController.search);
 router.route('/house').get(HouseController.findAllHouse);
 // CREATE info nha
 router.route('/house/create').post(HouseController.createHouse);
@@ -27,7 +30,5 @@ router.route('/house/update').put(HouseController.updateAllField);
 router.route('/house/updateSold').put(HouseController.updateSold);
 // DELETE nha
 router.route('/house/delete').delete(HouseController.deleteHouse);
-// search
-router.route('/house/search').get(HouseController.search);
 
 export default router;

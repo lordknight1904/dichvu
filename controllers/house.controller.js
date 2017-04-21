@@ -128,7 +128,34 @@ export function deleteHouse(req, res) {
     });
 }
 export function search(req, res) {
-    res.json({"req":"sdasdasdas"});
     let url = req.query;
-    console.log( url.city);
+    let city = url.city ? new RegExp("^" + url.city,"i") : new RegExp();
+    let district = url.district ? new RegExp("^" + url.district,"i") : new RegExp();
+    let fNo = url.fno ? url.fno : 0;
+    let bno = url.bno ? url.bno : 0;
+    let bthno = url.bthno ? url.bthno : 0;
+    let bedno = url.bedno ? url.bedno : 0;
+    let lno = url.lno ? url.lno : 0;
+    let kno = url.kno ? url.kno : 0;
+    let price = url.price ? url.price : 0;
+    let square = url.square ? url.square : 0;
+    House.find({
+        'location.city': city,
+        'location.district': district,
+        'floorNo': {$gte: fNo},
+        'basementNo': {$gte: bno},
+        'bathroomNo': {$gte: bthno},
+        'bedroomNo': {$gte: bedno},
+        'livingroomNo': {$gte: lno},
+        'kitchenNo': {$gte: kno},
+        'price': {$gte: price},
+        'square': {$gte: square},
+        'onSale': true
+    }, function (err, houses) {
+        if(err)
+            res.send(err);
+        else {
+            res.json({houses});
+        }
+    });
 }
